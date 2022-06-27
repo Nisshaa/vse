@@ -1,0 +1,65 @@
+изменить
+ public partial class editing : Form
+    {
+        public string id_;
+        List<string> L1;
+        Connect con = new Connect();
+        public editing()
+        {
+            InitializeComponent();
+        }
+
+        private void Form3_Load(object sender, EventArgs e)
+        {
+            string sql = "select * from product WHERE IdProduct ='" + id_ + "'";
+            int couSt = 5;
+
+            L1 = new List<string>(con.ListBD(sql, couSt));
+            textBox1.Text = L1[1];
+            textBox2.Text = L1[3];
+            textBox3.Text = L1[4];
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string s = "Update product set Name = '" + textBox1.Text + "', Cost='" + textBox2.Text + "',Colichestvo='" + textBox3.Text + "'" +
+               "where IdProduct ='" + id_ + "'";
+            con.SIDU(s);
+            MessageBox.Show("Запись изменена");
+        }
+    }
+
+
+первая форма
+
+ public partial class Mer : Form
+    {
+        Connect con = new Connect();
+        
+
+        public Mer()
+        {
+            InitializeComponent();
+        }
+
+        private void Mer_Load(object sender, EventArgs e)
+        {
+            string qwery = "select * from meropr";
+            dataGridView1.DataSource = con.CO(qwery).Tables[0];
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            awf f1 = new awf();
+            f1.Show();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string sql = "INSERT INTO meropr( Событие, Город) VALUES('" + textBox1.Text + "','" + textBox2.Text + "')";
+            con.SIDU(sql);
+            MessageBox.Show("Запись добавлена");
+        }
+
+    }

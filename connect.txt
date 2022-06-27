@@ -1,0 +1,73 @@
+private DataSet ds;
+        private MySqlConnection con;
+      // private string connectString = "server=server232;user=serv232;password=123456;database=predprmin;sslmode=none";
+        private string connectString = "server=127.0.0.1;user=root;password=123456;database=sad;sslmode=none";
+        private MySqlDataAdapter adapter;
+        private MySqlDataReader dr;
+        private MySqlCommand cmd;
+
+
+public DataSet CO(string query)
+        {
+            con = new MySqlConnection(connectString);
+            con.Open();
+            adapter = new MySqlDataAdapter(query, con);
+            ds = new DataSet();
+            adapter.Fill(ds);
+            ConectClose();
+            return ds;
+        }
+
+
+        public void ConectClose()
+        {
+            con.Close();
+        }
+
+
+Connect con = new Connect();
+
+
+ public string[] ListBD(string sql, int count_col)
+        {
+            string[] l1 = new string[count_col];
+            con = new MySqlConnection(connectString);
+            con.Open();
+
+            MySqlCommand cmd2 = new MySqlCommand(sql, con);
+            try
+            {
+                MySqlDataReader dr2 = cmd2.ExecuteReader();
+                dr2.Read();
+                for (int i = 0; i < count_col; i++)
+                {
+                    l1[i] = dr2.GetValue(i).ToString();
+                }
+                dr2.Close();
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return l1;
+        }
+
+
+
+        public void SIDU(string sql) 
+        {
+            con = new MySqlConnection(connectString);
+            con.Open();
+            MySqlCommand cmd2 = con.CreateCommand();
+            try
+            {
+                cmd2.CommandText = sql;
+                cmd2.ExecuteNonQuery();
+                con.Close(); 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }

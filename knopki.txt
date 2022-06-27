@@ -1,0 +1,17 @@
+string qwery = "select * from meropr_import";
+            dataGridView1.DataSource = con.CO(qwery).Tables[0];
+
+
+editing2 f5 = new editing2();
+           // f5.id_ = dataGridView3[0, dataGridView3.CurrentRow.Index].Value.ToString();
+            f5.Show();
+
+
+  string sql = "INSERT INTO meropr( Событие, Город) VALUES('" + textBox1.Text + "','" + textBox2.Text + "')";
+            con.SIDU(sql);
+            MessageBox.Show("Запись добавлена");
+
+ string s = "Update product set Name = '" + textBox1.Text + "', Cost='" + textBox2.Text + "',Colichestvo='" + textBox3.Text + "'" +
+               "where IdProduct ='" + id_ + "'";
+            con.SIDU(s);
+            MessageBox.Show("Запись изменена");
