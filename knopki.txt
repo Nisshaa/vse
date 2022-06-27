@@ -15,3 +15,11 @@ editing2 f5 = new editing2();
                "where IdProduct ='" + id_ + "'";
             con.SIDU(s);
             MessageBox.Show("Запись изменена");
+            
+           {
+          int id=  dataGridView1.CurrentCell.RowIndex;
+            string id1 = dataGridView1[0, id].Value.ToString();
+            string s = "DELETE FROM zakaz WHERE Id = '" + id1 + "'";
+            con.SIDU(s);
+
+        }
